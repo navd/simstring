@@ -6,6 +6,13 @@ setup.py file for SWIG example
 
 import sys
 import os.path
+import os
+from distutils.sysconfig import get_config_vars
+
+(opt,) = get_config_vars('OPT')
+os.environ['OPT'] = " ".join(
+    flag for flag in opt.split() if flag != '-Wstrict-prototypes'
+)
 
 def get_rootdir():
     return os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
